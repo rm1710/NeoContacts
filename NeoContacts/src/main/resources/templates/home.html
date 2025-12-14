@@ -1,40 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" th:replace="~{base::parent}">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
-
-    <link rel="stylesheet" data-th-href="@{'css/output.css'}" />
-    <style>
-        .container {
-            margin: auto;
-            width: 50%;
-            padding: 30px;
-            background: #e2e2e2;
-        }
-    </style>
 </head>
-
 <body>
-    <div class="container bg-gray-200 w-1/2 p-4 flex flex-col mx-auto mt-4">
-        <h1 class="text-2 font-bold" data-th-text="${name}">Welcome to NeoContacts Home Page</h1>
-        <p>Youtube Channel: <span data-th-text="${TIMSCDR}"></span></p>
-        <p>Github: <span th:text="${github}"></span></p>
-        <a data-th-href="${github}">Github Repo</a>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque, voluptatem molestias. Nobis veniam accusamus voluptatibus cumque alias, rem ex voluptates excepturi, libero tenetur iste vero officia blanditiis deserunt quos nam.</p>
-
-        <div>
-            <button class="px-3 py-3 rounded bg-blue-700 text-white hover:bg-blue-400">
-                Click here
-            </button>
-        </div>
-    </div>
-
-      
-
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
-
+    
 </body>
 </html>

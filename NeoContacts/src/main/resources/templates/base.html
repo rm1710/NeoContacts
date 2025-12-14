@@ -1,5 +1,15 @@
-<div class="parent-fragment" th:fragment="parent(x,y)">
-    <h1>This is parent fragment</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto qui sint placeat perspiciatis, voluptatibus asperiores pariatur officiis quod accusantium ipsam quaerat quidem minus ex a ab odit atque itaque distinctio.</p>
-    <h1>Values from child: <span th:text="${x}"></span> <br><span th:text="${y}"></span></h1>
-</div>
+<!DOCTYPE html>
+<html lang="en" th:fragment="parent" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base page</title>
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" </head>
+
+<body>
+    Base page Content
+</body>
+
+</html>
