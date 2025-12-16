@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base::parent(~{::#content},~(~{::#title},~{::#script})}">
+<html lang="en"
+      th:replace="~{base :: parent(~{::section}, ~{::title}, ~{})}">
+
 <head>
-    <title>services</title>
+    <title>Document</title>
 </head>
+
 <body>
-    <section>
-        <h2> welcome to services page</h2>
-    </section>
+<section>
+    <h2>Welcome to services</h2>
+</section>
 </body>
 </html>
