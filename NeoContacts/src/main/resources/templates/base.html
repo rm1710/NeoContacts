@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html class="dark" lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:fragment="parent(content,title,script)">
+<html class="light" lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="parent(content,title,script)">
 
 <head>
     <meta charset="UTF-8">
@@ -11,22 +10,23 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet">
 </head>
 
-<body>
-<!-- Navbar -->
+<body class="dark:bg-gray-900 dark:text-white">
+    <!-- Navbar -->
 
-<div data-th-replace="navbar::navbar"></div>
+    <div data-th-replace="navbar::navbar"></div>
 
-<!-- Main Content -->
-<div class="p-4 pt-20">
-    <section th:replace="${content}"></section>
-</div>
+    <!-- Main Content -->
+    <div class="p-4 pt-20 h-screen  w-full">
+        <section th:replace="${content}"></section>
+    </div>
 
-<!-- Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-<th:block th:replace="${script}"></th:block>
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <th:block th:replace="${script}"></th:block>
 
-<!-- Footer -->
-<footer>Footer: Ritesh</footer>
+    <!-- Footer -->
+    <footer>Footer: Ritesh</footer>
 
 </body>
+
 </html>
