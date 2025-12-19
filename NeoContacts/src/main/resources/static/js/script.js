@@ -1,0 +1,55 @@
+console.log("Script loaded successfully.");
+
+let currentTheme = getTheme();
+console.log(currentTheme);
+
+
+document.addEventListener("DOMContentLoaded", () =>{
+    changeTheme();
+});
+
+
+function changeTheme() {
+    //set to web page 
+    document.querySelector("html").classList.add(currentTheme);
+
+    const changeThemeButton = document.querySelector('#theme_change_button');
+    changeThemeButton.querySelector("span").textContent = currentTheme === "light" ? "dark" : "light";
+
+    changeThemeButton.addEventListener('click', (event) => {
+        const oldTheme = currentTheme;
+        console.log("Theme change button clicked.");
+        if (currentTheme === "dark") {
+            currentTheme = "light";
+        } else {
+            currentTheme = "dark";
+        }
+
+        setTheme(currentTheme);
+        document.querySelector("html").classList.remove(oldTheme);
+        document.querySelector("html").classList.add(currentTheme);
+
+        changeThemeButton.querySelector("span").textContent = currentTheme === "light" ? "dark" : "light";
+    });
+}
+
+
+
+function setTheme(theme) {
+    localStorage.setItem("theme", theme);
+}
+
+function getTheme() {
+    let theme = localStorage.getItem("theme");
+
+    return theme ? theme : "dark";
+}
+
+
+function changePageTheme(theme,oldTheme) {
+    setTheme(currentTheme);
+    document.querySelector("html").classList.remove(oldTheme);
+    document.querySelector("html").classList.add(theme);
+
+    document.querySelector("#theme_change_button span").querySelector("span").textContent = theme === "light" ? "dark" : "light";
+}
