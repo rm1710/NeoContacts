@@ -48,7 +48,9 @@ function getTheme() {
 
 function changePageTheme(theme,oldTheme) {
     setTheme(currentTheme);
-    document.querySelector("html").classList.remove(oldTheme);
+    if(oldTheme){
+        document.querySelector("html").classList.remove(oldTheme);
+    }
     document.querySelector("html").classList.add(theme);
 
     document.querySelector("#theme_change_button span").querySelector("span").textContent = theme === "light" ? "dark" : "light";

@@ -1,6 +1,5 @@
 package com.contacts.entities;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,8 +7,6 @@ import jakarta.persistence.Column;
 import lombok.*;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-
-
 
 @Entity
 @Data
