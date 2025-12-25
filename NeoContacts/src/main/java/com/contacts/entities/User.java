@@ -19,7 +19,7 @@ import jakarta.persistence.OneToMany;
 public class User {
 
     @Id
-    private Long userId;
+    private String userId;
 
     @Column(name="user_name", nullable=false)
     private String name;

@@ -1,16 +1,21 @@
 package com.contacts.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.contacts.entities.User;
 import com.contacts.forms.UserForm;
+import com.contacts.services.UserService;
 
 @Controller
 public class PageController {
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/home")
     public String home(Model model) {
@@ -59,6 +64,18 @@ public class PageController {
         // fetch the form data
         // validate the for data
         // save to database
+        // userService
+        User user = User.builder()
+                .name(userForm.getName())
+                .email(userForm.getEmail())
+                .password(userForm.getPassword())
+                .about(userForm.getAbout())
+                .phoneNumber(userForm.getPhoneNumber())
+                .profilePic("")
+                .build();
+        User savedUser=userService.saveUser(user);
+        System.out.println(savedUser);
+
         // message= "Registration successful";
         //
         return "redirect:/register";
