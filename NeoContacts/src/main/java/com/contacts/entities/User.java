@@ -11,10 +11,14 @@ import jakarta.persistence.Table;
 import lombok.*;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import java.util.*;
+import jakarta.persistence.ElementCollection;
 
-import org.apache.catalina.User;
+import java.util.*;
+import java.util.stream.Collectors;
+
+
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.OneToMany;
@@ -37,6 +41,7 @@ public class User implements UserDetails {
     @Column(unique = true, nullable = false)
     private String email;
 
+    @Getter(AccessLevel.NONE)
     private String password;
 
     @Column(length = 1000)
@@ -47,31 +52,33 @@ public class User implements UserDetails {
 
     private String phoneNumber;
 
-    private boolean enabled = false;
+    @Getter(value = AccessLevel.NONE)
+    private boolean enabled = true;
     private boolean emailVerified = false;
     private boolean phoneVerified = false;
 
-    @Enumerated(value= EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     private Providers provider = Providers.SELF;
     private String providerUserId;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Contact> contacts = new ArrayList<>();
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roleList= new ArrayList<>();
+
+    // for this project
+    // email id is username
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        return null;
+        Collection<SimpleGrantedAuthority> roles = roleList.stream().map(role -> new SimpleGrantedAuthority(role))
+            .collect(Collectors.toList());
+        return roles;
     }
-
-
-    //for this project
-    //email id is username
 
     @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.email;
     }
 
     @Override
@@ -89,6 +96,14 @@ public class User implements UserDetails {
         return true;
     }
 
-    
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
 
 }

@@ -9,11 +9,13 @@ import org.slf4j.LoggerFactory;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.contacts.entities.User;
 import com.contacts.repository.UserRepo;
 import com.contacts.services.UserService;
+import com.contacts.exceptions.AppConstants;
 import com.contacts.exceptions.ResourcesNotFoundException;
 
 
@@ -24,12 +26,21 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public User saveUser(User user) {
         
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        user.setRoleList(List.of(AppConstants.ROLE_USER));
+        logger.info(user.getProvider().toString());
+        
         return userRepo.save(user);
+        
     }
 
     @Override
