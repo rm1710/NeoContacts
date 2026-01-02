@@ -8,9 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.contacts.entities.User;
 import com.contacts.exceptions.Helper;
+import com.contacts.services.UserService;
 
 
 
@@ -20,6 +23,11 @@ public class UserController {
 
     private Logger logger = LoggerFactory.getLogger(UserController.class);
 
+    @Autowired
+    private UserService userService;
+
+
+    
     //user dashboard
     @RequestMapping(value = "/dashboard")
     public String userDashboard(){
@@ -28,11 +36,8 @@ public class UserController {
     }
 
     @RequestMapping(value="/profile")
-    public String userProfile(Authentication authentication) {
-        String username = Helper.getEmailOfLoggedInUser(authentication);
-
-        logger.info("User Logged: {}"+username);
-
+    public String userProfile(Model model,Authentication authentication) {
+        
         return "user/profile";
     }
     
