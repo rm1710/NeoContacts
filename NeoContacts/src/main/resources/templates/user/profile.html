@@ -4,12 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>profile</title>
+    <title data-th-text="${loggedInUser.name} + ' | Dashboard'">Profile</title>
 </head>
 
 <body>
     <div id="content">
-        <h1>Welcome to profile page</h1>
+        <div class="sm:pl-64" style="height: 1000px;">
+            <div class="flex justify-center flex-col items-center">
+                <h1>Welcome to profile page</h1>
+            </div>
+        </div>
     </div>
 
     <script>

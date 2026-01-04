@@ -14,13 +14,13 @@ function changeTheme() {
     document.querySelector("html").classList.add(currentTheme);
 
     const changeThemeButton = document.querySelector('#theme_change_button');
-    changeThemeButton.querySelector("span").textContent = currentTheme === "light" ? "dark" : "light";
+    changeThemeButton.querySelector("span").textContent = currentTheme === "Light" ? "dark" : "Light";
 
     changeThemeButton.addEventListener('click', (event) => {
         const oldTheme = currentTheme;
         console.log("Theme change button clicked.");
         if (currentTheme === "dark") {
-            currentTheme = "light";
+            currentTheme = "Light";
         } else {
             currentTheme = "dark";
         }
@@ -29,7 +29,7 @@ function changeTheme() {
         document.querySelector("html").classList.remove(oldTheme);
         document.querySelector("html").classList.add(currentTheme);
 
-        changeThemeButton.querySelector("span").textContent = currentTheme === "light" ? "dark" : "light";
+        changeThemeButton.querySelector("span").textContent = currentTheme === "Light" ? "dark" : "Light";
     });
 }
 
@@ -53,5 +53,5 @@ function changePageTheme(theme,oldTheme) {
     }
     document.querySelector("html").classList.add(theme);
 
-    document.querySelector("#theme_change_button span").querySelector("span").textContent = theme === "light" ? "dark" : "light";
+    document.querySelector("#theme_change_button span").querySelector("span").textContent = theme === "Light" ? "dark" : "Light";
 }

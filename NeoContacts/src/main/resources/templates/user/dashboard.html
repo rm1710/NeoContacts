@@ -1,11 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{::script})}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title data-th-text="${loggedInUser.name} + ' | Dashboard'">Profile</title>
 </head>
+
 <body>
-    <h1>User Dashboard</h1>
+    <div id="content">
+        <div class="pl-64" style="height: 100px;">
+            <div class="flex justify-center flex-col items-center">
+                <h1>Welcome to dashboard page</h1>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log("This is profile page");
+    </script>
+    <script>
+        console.log("second profile page script");
+    </script>
 </body>
+
 </html>

@@ -1,154 +1,171 @@
-<nav
-  th:fragment="user-navbar"
-  class="bg-white border-gray-900 shadow-sm dark:bg-gray-900 sm:pl-64 fixed w-full top-0 left-0 right-0"
->
-  <div
-    class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
-  >
-    <button
-      data-drawer-target="logo-sidebar"
-      data-drawer-toggle="logo-sidebar"
-      aria-controls="logo-sidebar"
+<nav th:fragment="user-navbar" class="fixed w-full z-20 top-0 start-0
+            backdrop-blur-md bg-white/70 dark:bg-gray-900/70
+            border-b border-gray-200/50 dark:border-gray-700/50
+            shadow-sm  sm:pl-64 ">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-6 py-3">
+    <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
       type="button"
-      class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-    >
+      class="text-heading bg-transparent box-border border border-transparent hover:bg-neutral-secondary-medium focus:ring-4 focus:ring-neutral-tertiary font-medium leading-5 rounded-base ms-3 mt-3 text-sm p-2 focus:outline-none inline-flex sm:hidden">
       <span class="sr-only">Open sidebar</span>
-      <svg
-        class="w-6 h-6"
-        aria-hidden="true"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          clip-rule="evenodd"
-          fill-rule="evenodd"
-          d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-        ></path>
+      <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+        viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h10" />
       </svg>
     </button>
-    <!-- brand -->
-    <a
-      data-th-src="@{'/'}"
-      class="flex items-center space-x-3 rtl:space-x-reverse"
-    >
-      <img
-        data-th-src="@{'/images/telephone.png'}"
-        class="h-8 shadow rounded-full"
-        alt="Flowbite Logo"
-      />
+    <!-- Logo -->
+    <a th:href="@{/home}" class="flex items-center gap-3">
+      <img data-th-src="@{'/images/phonebook.png'}" class="h-8 w-8" alt="NeoContacts Logo" />
       <span
-        class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"
-        >SCM2.0</span
-      >
+        class="text-xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
+        NeoContacts
+      </span>
     </a>
 
-    <!-- end of brand logo -->
-    <div
-      class="flex gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
-    >
-      <!-- dark light theme button -->
-      <button
-        id="theme_change_button"
-        class="bg-gray-200 px-3 py-2 rounded-lg dark:bg-gray-600"
-      >
-        <i class="fa-solid fa-circle-half-stroke"></i> <span>Light</span>
+    <!-- Right Actions -->
+    <div class="inline-flex items-center gap-2 md:order-2">
+
+      <!-- Theme Toggle -->
+      <button id="theme_change_button" class="group inline-flex items-center gap-2
+               rounded-lg px-3 py-2
+               bg-gray-100 dark:bg-gray-800
+               text-gray-700 dark:text-gray-200
+               hover:bg-gray-200 dark:hover:bg-gray-700
+               transition-all duration-300
+               focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <i class="fa-solid fa-circle-half-stroke
+                  transition-transform duration-300 group-hover:rotate-180"></i>
+        <span class="hidden sm:inline text-sm">Theme</span>
       </button>
-      <a
-        data-th-href="@{'/user/profile'}"
-        type="button"
-        class="hidden md:flex text-white bg-green-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        <span data-th-text="${loggedInUser.name}"></span>
+
+      <a th:href="@{/user/profile}" class="inline-flex items-center justify-center
+          px-5 py-2.5 text-sm font-medium
+          rounded-lg
+          text-white
+          bg-gradient-to-r from-blue-600 to-purple-600
+          hover:from-blue-700 hover:to-purple-700
+          transition-all duration-200
+          hover:shadow-md active:scale-95
+          focus:outline-none focus:ring-2 focus:ring-blue-400 hidden md:flex">
+
+        <i class="fa-solid fa-user mr-2"></i>
+
+        <span th:text="${loggedInUser != null ? loggedInUser.name : 'Profile'}"></span>
       </a>
-      <a
-        data-th-href="@{'/do-logout'}"
-        type="button"
-        class="hidden md:flex text-white bg-red-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
+
+      <!-- Sign Up (Primary) -->
+      <a data-th-href="@{'/do-logout'}" class="relative inline-flex items-center justify-center
+          px-5 py-2.5 text-sm font-semibold
+          rounded-lg
+          text-white
+          bg-red-600 dark:bg-red-500
+          hover:bg-red-700 dark:hover:bg-red-600
+          transition-all duration-200
+          shadow-sm hover:shadow-lg
+          active:scale-95
+          focus:outline-none focus:ring-2 focus:ring-red-400 hidden md:flex">
         Logout
       </a>
 
-      <!-- icons to open menu on small screen -->
-      <button
-        data-collapse-toggle="navbar-cta"
-        type="button"
-        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-        aria-controls="navbar-cta"
-        aria-expanded="false"
-      >
+      <!-- Mobile Menu Button -->
+      <button data-collapse-toggle="navbar-cta" type="button" class="inline-flex items-center justify-center
+               w-10 h-10 md:hidden
+               rounded-lg
+               text-gray-600 dark:text-gray-300
+               hover:bg-gray-100 dark:hover:bg-gray-800
+               transition
+               focus:outline-none focus:ring-2 focus:ring-blue-400" aria-controls="navbar-cta" aria-expanded="false">
         <span class="sr-only">Open main menu</span>
-        <svg
-          class="w-5 h-5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 17 14"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M1 1h15M1 7h15M1 13h15"
-          />
+        <svg class="w-6 h-6" aria-hidden="true" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14" />
         </svg>
       </button>
     </div>
 
-    <!-- menus -->
-    <div
-      class="items-center z-50 justify-between hidden w-full md:flex md:w-auto md:order-1"
-      id="navbar-cta"
-    >
-      <ul
-        class="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
-      >
+    <!-- Nav Links -->
+    <div class="hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+      <ul class="flex flex-col md:flex-row md:items-center
+               gap-2 md:gap-8
+               mt-4 md:mt-0
+               p-4 md:p-0
+               rounded-xl
+               bg-white/80 dark:bg-gray-900/80
+               backdrop-blur-md
+               border border-gray-200/50 dark:border-gray-700/50
+               md:border-0">
+
+        <!-- Link Item -->
         <li>
-          <a
-            data-th-href="@{'/home'}"
-            class="block py-2 px-3 md:p-0 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:dark:text-blue-500"
-            aria-current="page"
-            >Home</a
-          >
-        </li>
-        <li>
-          <a
-            data-th-href="@{'/about'}"
-            class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-            >About</a
-          >
-        </li>
-        <li>
-          <a
-            data-th-href="@{'/services'}"
-            class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-            >Services</a
-          >
-        </li>
-        <li>
-          <a
-            data-th-href="@{'/contact'}"
-            class="block py-2 px-3 md:p-0 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
-            >Contact</a
-          >
+          <a th:href="@{'/home'}" class="relative block px-3 py-2 text-sm font-medium
+                    text-gray-700 dark:text-gray-300
+                    transition-colors duration-200
+                    hover:text-blue-600 dark:hover:text-blue-400
+                    after:absolute after:left-0 after:-bottom-1
+                    after:h-0.5 after:w-0
+                    after:bg-blue-600 dark:after:bg-blue-400
+                    after:transition-all after:duration-300
+                    hover:after:w-full">
+            Home
+          </a>
         </li>
 
         <li>
-          <a
-            data-th-href="@{'/user/profile'}"
-            type="button"
-            class="md:hidden text-white bg-green-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            <span data-th-text="${loggedInUser.name}"></span>
+          <a th:href="@{'/about'}" class="relative block px-3 py-2 text-sm font-medium
+             text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400
+             after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0
+             after:bg-blue-600 dark:after:bg-blue-400 after:transition-all after:duration-300
+             hover:after:w-full">
+            About
+          </a>
+        </li>
+
+        <li>
+          <a th:href="@{'/services'}" class="relative block px-3 py-2 text-sm font-medium
+             text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400
+             after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0
+             after:bg-blue-600 dark:after:bg-blue-400 after:transition-all after:duration-300
+             hover:after:w-full">
+            Services
+          </a>
+        </li>
+
+        <li>
+          <a th:href="@{'/contact'}" class="relative block px-3 py-2 text-sm font-medium
+             text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400
+             after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0
+             after:bg-blue-600 dark:after:bg-blue-400 after:transition-all after:duration-300
+             hover:after:w-full">
+            Contact
           </a>
         </li>
         <li>
-          <a
-            data-th-href="@{'/do-logout'}"
-            type="button"
-            class="md:hidden text-white bg-red-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
+          <a th:href="@{/user/profile}" class="inline-flex items-center justify-center
+              px-5 py-2.5 text-sm font-medium
+              rounded-lg
+              text-white
+              bg-gradient-to-r from-blue-600 to-purple-600
+              hover:from-blue-700 hover:to-purple-700
+              transition-all duration-200
+              hover:shadow-md active:scale-95
+              focus:outline-none focus:ring-2 focus:ring-blue-400 md:hidden">
+
+            <i class="fa-solid fa-user mr-2"></i>
+
+            <span th:text="${loggedInUser != null ? loggedInUser.name : 'Profile'}"></span>
+          </a>
+        </li>
+
+        <!-- Sign Up (Primary) -->
+        <li>
+          <a data-th-href="@{'/do-logout'}" class="relative inline-flex items-center justify-center
+            px-5 py-2.5 text-sm font-semibold
+            rounded-lg
+            text-white
+            bg-red-600 dark:bg-red-500
+            hover:bg-red-700 dark:hover:bg-red-600
+            transition-all duration-200
+            shadow-sm hover:shadow-lg
+            active:scale-95
+            focus:outline-none focus:ring-2 focus:ring-red-400 md:hidden">
             Logout
           </a>
         </li>
