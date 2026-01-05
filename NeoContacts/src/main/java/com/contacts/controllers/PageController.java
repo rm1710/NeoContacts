@@ -23,6 +23,11 @@ public class PageController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/home";
+    }
+
     @RequestMapping("/home")
     public String home(Model model) {
         System.out.println("home page handler");
@@ -63,14 +68,15 @@ public class PageController {
     }
 
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
-    public String processRegister(@Valid @ModelAttribute UserForm userForm,BindingResult rBindingResult, HttpSession session) {
+    public String processRegister(@Valid @ModelAttribute UserForm userForm, BindingResult rBindingResult,
+            HttpSession session) {
         System.out.println("processing register form");
         System.out.println(userForm);
         // fetch the form data
         // validate the for data
-         if (rBindingResult.hasErrors()) {
-        return "register";
-    }
+        if (rBindingResult.hasErrors()) {
+            return "register";
+        }
         // save to database
         // userService
         // User user = User.builder()
@@ -93,7 +99,7 @@ public class PageController {
         User savedUser = userService.saveUser(user);
         System.out.println(savedUser);
 
-        Message message=Message.builder().content("Registration Successfully!!!").type(MessageType.green).build();
+        Message message = Message.builder().content("Registration Successfully!!!").type(MessageType.green).build();
 
         session.setAttribute("message", message);
 

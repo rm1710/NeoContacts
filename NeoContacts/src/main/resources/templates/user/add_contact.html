@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{::script})}">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-th-text="${loggedInUser.name} + ' | Add Contact'"></title>
+</head>
+
+<body>
+    <div id="content">
+
+        <!-- Sidebar -->
+        <div th:if="${loggedInUser}">
+            <div data-th-replace="~{user/sidebar::sidebar}"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="sm:pl-64 pt-10 min-h-screen 
+                bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50
+                dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900 dark:to-slate-800">
+
+            <div class="grid grid-cols-12">
+                <div class="col-span-12 md:col-span-6 md:col-start-4">
+
+                    <!-- CARD -->
+                    <div class="p-6 rounded-base shadow-xs border
+                            bg-gradient-to-br from-white via-purple-50 to-pink-50
+                            border-purple-200
+                            dark:bg-slate-800 dark:border-slate-700">
+
+                        <h1 class="text-3xl font-semibold text-gray-900 dark:text-white">
+                            Add New Contact
+                        </h1>
+
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">
+                            This contact will be stored on cloud, you can direct email this client from scm...
+                        </p>
+
+                        <!-- FORM -->
+                        <form class="mt-8 space-y-4">
+
+                            <!-- NAME -->
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+                                    Contact Name
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <i class="fa-regular fa-user text-purple-400"></i>
+                                    </div>
+                                    <input type="text" class="block w-full ps-9 pe-3 py-2.5 text-sm rounded-base shadow-xs
+                                           bg-purple-50 border border-purple-300 text-gray-900
+                                           placeholder:text-gray-400
+                                           focus:ring-purple-400 focus:border-purple-400
+                                           dark:bg-slate-700 dark:border-slate-600 dark:text-white" placeholder="Name">
+                                </div>
+                            </div>
+
+                            <!-- EMAIL -->
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+                                    Contact Email
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <i class="fa-regular fa-envelope text-purple-400"></i>
+                                    </div>
+                                    <input type="email" class="block w-full ps-9 pe-3 py-2.5 text-sm rounded-base shadow-xs
+                                           bg-purple-50 border border-purple-300 text-gray-900
+                                           placeholder:text-gray-400
+                                           focus:ring-purple-400 focus:border-purple-400
+                                           dark:bg-slate-700 dark:border-slate-600 dark:text-white"
+                                        placeholder="email@example.com">
+                                </div>
+                            </div>
+
+                            <!-- PHONE -->
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+                                    Contact Phone
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <i class="fa-solid fa-phone text-purple-400"></i>
+                                    </div>
+                                    <input type="tel" class="block w-full ps-9 pe-3 py-2.5 text-sm rounded-base shadow-xs
+                                           bg-purple-50 border border-purple-300 text-gray-900
+                                           placeholder:text-gray-400
+                                           focus:ring-purple-400 focus:border-purple-400
+                                           dark:bg-slate-700 dark:border-slate-600 dark:text-white"
+                                        placeholder="0000000000">
+                                </div>
+                            </div>
+
+                            <!-- ADDRESS -->
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+                                    Contact Address
+                                </label>
+                                <textarea rows="3" class="block w-full p-3 text-sm rounded-base shadow-xs
+                                       bg-purple-50 border border-purple-300 text-gray-900
+                                       placeholder:text-gray-400
+                                       focus:ring-purple-400 focus:border-purple-400
+                                       dark:bg-slate-700 dark:border-slate-600 dark:text-white"
+                                    placeholder="Address of contact"></textarea>
+                            </div>
+
+                            <!-- DESCRIPTION -->
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+                                    Contact Description
+                                </label>
+                                <textarea rows="3" class="block w-full p-3 text-sm rounded-base shadow-xs
+                                       bg-purple-50 border border-purple-300 text-gray-900
+                                       placeholder:text-gray-400
+                                       focus:ring-purple-400 focus:border-purple-400
+                                       dark:bg-slate-700 dark:border-slate-600 dark:text-white"
+                                    placeholder="Description"></textarea>
+                            </div>
+
+                            <!-- SOCIAL LINKS -->
+                            <div class="flex gap-3">
+                                <div class="w-1/2 relative">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <i class="fa-solid fa-earth-americas text-purple-400"></i>
+                                    </div>
+                                    <input type="text" class="block w-full ps-9 pe-3 py-2.5 text-sm rounded-base shadow-xs
+                                           bg-purple-50 border border-purple-300 text-gray-900
+                                           focus:ring-purple-400 focus:border-purple-400
+                                           dark:bg-slate-700 dark:border-slate-600 dark:text-white"
+                                        placeholder="Website">
+                                </div>
+
+                                <div class="w-1/2 relative">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <i class="fa-brands fa-linkedin text-purple-400"></i>
+                                    </div>
+                                    <input type="text" class="block w-full ps-9 pe-3 py-2.5 text-sm rounded-base shadow-xs
+                                           bg-purple-50 border border-purple-300 text-gray-900
+                                           focus:ring-purple-400 focus:border-purple-400
+                                           dark:bg-slate-700 dark:border-slate-600 dark:text-white"
+                                        placeholder="LinkedIn">
+                                </div>
+                            </div>
+
+                            <!-- FILE -->
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+                                    Contact Image
+                                </label>
+                                <input type="file" class="block w-full text-sm rounded-base shadow-xs cursor-pointer
+                                       bg-purple-50 border border-purple-300 text-gray-900
+                                       dark:bg-slate-700 dark:border-slate-600 dark:text-gray-300">
+                            </div>
+
+                            <!-- FAVORITE -->
+                            <div class="flex items-center gap-2">
+                                <input type="checkbox"
+                                    class="w-4 h-4 text-purple-500 border-purple-300 rounded focus:ring-purple-400">
+                                <label class="text-sm text-gray-700 dark:text-gray-300">
+                                    Mark as favorite
+                                </label>
+                            </div>
+
+                            <!-- BUTTONS -->
+                            <div class="flex gap-3 pt-2">
+                                <button type="submit" class="w-1/2 px-5 py-2.5 text-sm font-medium text-white rounded-base
+                                       bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400
+                                       hover:from-purple-500 hover:via-pink-500 hover:to-indigo-500
+                                       focus:ring-4 focus:ring-purple-200 transition">
+                                    Add Contact
+                                </button>
+
+                                <button type="reset" class="w-1/2 px-5 py-2.5 text-sm font-medium text-gray-800 rounded-base
+                                       bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200
+                                       hover:from-pink-300 hover:via-purple-300 hover:to-indigo-300
+                                       focus:ring-4 focus:ring-purple-200 transition">
+                                    Reset
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                    <!-- CARD END -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log("Add Contact page loaded");
+    </script>
+</body>
+
+</html>
