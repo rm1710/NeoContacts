@@ -13,7 +13,7 @@ import com.contacts.exceptions.Helper;
 import com.contacts.forms.ContactForm;
 import com.contacts.services.ContactService;
 
-import com.contacts.services.Imageservice;
+import com.contacts.services.ImgService;
 import com.contacts.services.UserService;
 import com.contacts.exceptions.Message;
 import com.contacts.exceptions.MessageType;
@@ -36,7 +36,7 @@ public class ContactController {
     private ContactService contactService;
 
     @Autowired
-    private Imageservice imageService;
+    private ImgService imageService;
     @Autowired
     private UserService userService;
 
