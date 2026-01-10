@@ -1,4 +1,4 @@
-package com.contacts.exceptions;
+package com.contacts.Helper;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

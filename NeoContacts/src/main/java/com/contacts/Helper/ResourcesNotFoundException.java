@@ -1,4 +1,4 @@
-package com.contacts.exceptions;
+package com.contacts.Helper;
 
 public class ResourcesNotFoundException extends RuntimeException {
     public ResourcesNotFoundException() {

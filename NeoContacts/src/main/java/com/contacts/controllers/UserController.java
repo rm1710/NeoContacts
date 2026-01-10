@@ -11,8 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.contacts.Helper.Helper;
 import com.contacts.entities.User;
-import com.contacts.exceptions.Helper;
 import com.contacts.services.UserService;
 
 

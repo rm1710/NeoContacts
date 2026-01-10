@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.contacts.Helper.AppConstants;
+import com.contacts.Helper.ResourcesNotFoundException;
 import com.contacts.entities.User;
 import com.contacts.repository.UserRepo;
 import com.contacts.services.UserService;
-import com.contacts.exceptions.AppConstants;
-import com.contacts.exceptions.ResourcesNotFoundException;
 
 
 

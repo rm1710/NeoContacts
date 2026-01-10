@@ -8,192 +8,185 @@
 </head>
 
 <body class="">
-<div id="content">
+    <div id="content">
 
-    <!-- Sidebar -->
-    <div th:if="${loggedInUser}">
-        <div data-th-replace="~{user/sidebar::sidebar}"></div>
-    </div>
+        <!-- Sidebar -->
+        <div th:if="${loggedInUser}">
+            <div data-th-replace="~{user/sidebar::sidebar}"></div>
+        </div>
 
-    <!-- Main Content -->
-    <div class="sm:pl-64 pt-10 pb-10 min-h-screen
+        <!-- Main Content -->
+        <div class="sm:pl-64 pt-10 pb-10 min-h-screen
         bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50
         dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-800">
 
-        <div class="grid grid-cols-12">
-            <div class="col-span-12 md:col-span-6 md:col-start-4">
+            <div class="grid grid-cols-12">
+                <div class="col-span-12 md:col-span-6 md:col-start-4">
 
-                <!-- CARD -->
-                <div class="p-6 rounded-base shadow-lg border
+                    <!-- CARD -->
+                    <div class="p-6 rounded-base shadow-lg border
                     bg-white border-purple-200
                     dark:bg-slate-900 dark:border-slate-700">
 
-                    <div data-th-replace="message::messagebox"></div>
+                        <div data-th-replace="message::messagebox"></div>
 
-                    <h1 class="text-3xl font-semibold text-gray-900 dark:text-white">
-                        Add New Contact
-                    </h1>
+                        <h1 class="text-3xl font-semibold text-gray-900 dark:text-white">
+                            Add New Contact
+                        </h1>
 
-                    <p class="text-gray-600 dark:text-gray-400 mt-1">
-                        This contact will be stored on cloud, you can direct email this client from scm...
-                    </p>
+                        <p class="text-gray-600 dark:text-gray-400 mt-1">
+                            This contact will be stored on cloud, you can direct email this client from scm...
+                        </p>
 
-                    <!-- FORM -->
-                    <form class="mt-8 space-y-4"
-                          data-th-action="@{'/user/contacts/add'}"
-                          data-th-object="${contactForm}"
-                          method="post"
-                          enctype="multipart/form-data">
+                        <!-- FORM -->
+                        <form class="mt-8 space-y-4" data-th-action="@{'/user/contacts/add'}"
+                            data-th-object="${contactForm}" method="post" enctype="multipart/form-data">
 
-                        <!-- NAME -->
-                        <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                Contact Name
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                    <i class="fa-regular fa-user text-purple-400"></i>
-                                </div>
-                                <input data-th-field="*{name}" type="text"
-                                    class="block w-full ps-9 pe-3 py-2.5 text-sm rounded-base
+                            <!-- NAME -->
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Contact Name
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <i class="fa-regular fa-user text-purple-400"></i>
+                                    </div>
+                                    <input data-th-field="*{name}" type="text" class="block w-full ps-9 pe-3 py-2.5 text-sm rounded-base
                                     bg-purple-50 border border-purple-300 text-gray-900
                                     focus:ring-purple-400 focus:border-purple-400
                                     dark:bg-slate-800 dark:border-slate-600 dark:text-white dark:placeholder-gray-400"
-                                    placeholder="Name" />
-                            </div>
-                            <p class="text-red-500 text-sm"
-                               data-th-if="${#fields.hasErrors('name')}">
-                                Invalid Name
-                            </p>
-                        </div>
-
-                        <!-- EMAIL -->
-                        <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                Contact Email
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                    <i class="fa-regular fa-envelope text-purple-400"></i>
+                                        placeholder="Name" />
                                 </div>
-                                <input data-th-field="*{email}" type="email"
-                                    class="block w-full ps-9 pe-3 py-2.5 text-sm rounded-base
+                                <p class="text-red-500 text-sm" data-th-if="${#fields.hasErrors('name')}">
+                                    Invalid Name
+                                </p>
+                            </div>
+
+                            <!-- EMAIL -->
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Contact Email
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <i class="fa-regular fa-envelope text-purple-400"></i>
+                                    </div>
+                                    <input data-th-field="*{email}" type="email" class="block w-full ps-9 pe-3 py-2.5 text-sm rounded-base
                                     bg-purple-50 border border-purple-300 text-gray-900
                                     focus:ring-purple-400 focus:border-purple-400
                                     dark:bg-slate-800 dark:border-slate-600 dark:text-white dark:placeholder-gray-400"
-                                    placeholder="email@example.com" />
-                            </div>
-                            <p class="text-red-500 text-sm"
-                               data-th-if="${#fields.hasErrors('email')}"
-                               data-th-errors="*{email}">
-                                Invalid Email
-                            </p>
-                        </div>
-
-                        <!-- PHONE -->
-                        <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                Contact Phone
-                            </label>
-                            <div class="relative">
-                                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                    <i class="fa-solid fa-phone text-purple-400"></i>
+                                        placeholder="email@example.com" />
                                 </div>
-                                <input data-th-field="*{phoneNumber}" type="tel"
-                                    class="block w-full ps-9 pe-3 py-2.5 text-sm rounded-base
+                                <p class="text-red-500 text-sm" data-th-if="${#fields.hasErrors('email')}"
+                                    data-th-errors="*{email}">
+                                    Invalid Email
+                                </p>
+                            </div>
+
+                            <!-- PHONE -->
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Contact Phone
+                                </label>
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <i class="fa-solid fa-phone text-purple-400"></i>
+                                    </div>
+                                    <input data-th-field="*{phoneNumber}" type="tel" class="block w-full ps-9 pe-3 py-2.5 text-sm rounded-base
                                     bg-purple-50 border border-purple-300 text-gray-900
                                     focus:ring-purple-400 focus:border-purple-400
                                     dark:bg-slate-800 dark:border-slate-600 dark:text-white dark:placeholder-gray-400"
-                                    placeholder="0000000000" />
+                                        placeholder="0000000000" />
+                                </div>
+                                <p class="text-red-500 text-sm" data-th-if="${#fields.hasErrors('phoneNumber')}"
+                                    data-th-errors="*{phoneNumber}">
+                                    Invalid Phone Number
+                                </p>
                             </div>
-                            <p class="text-red-500 text-sm"
-                               data-th-if="${#fields.hasErrors('phoneNumber')}"
-                               data-th-errors="*{phoneNumber}">
-                                Invalid Phone Number
-                            </p>
-                        </div>
 
-                        <!-- ADDRESS -->
-                        <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                Contact Address
-                            </label>
-                            <textarea data-th-field="*{address}" rows="3"
-                                class="block w-full p-3 text-sm rounded-base
+                            <!-- ADDRESS -->
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Contact Address
+                                </label>
+                                <textarea data-th-field="*{address}" rows="3" class="block w-full p-3 text-sm rounded-base
                                 bg-purple-50 border border-purple-300 text-gray-900
                                 focus:ring-purple-400 focus:border-purple-400
                                 dark:bg-slate-800 dark:border-slate-600 dark:text-white dark:placeholder-gray-400"
-                                placeholder="Address of contact"></textarea>
-                            <p class="text-red-500 text-sm"
-                               data-th-if="${#fields.hasErrors('address')}">
-                                Invalid Address
-                            </p>
-                        </div>
+                                    placeholder="Address of contact"></textarea>
+                                <p class="text-red-500 text-sm" data-th-if="${#fields.hasErrors('address')}">
+                                    Invalid Address
+                                </p>
+                            </div>
 
-                        <!-- DESCRIPTION -->
-                        <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                Contact Description
-                            </label>
-                            <textarea data-th-field="*{description}" rows="3"
-                                class="block w-full p-3 text-sm rounded-base
+                            <!-- DESCRIPTION -->
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Contact Description
+                                </label>
+                                <textarea data-th-field="*{description}" rows="3" class="block w-full p-3 text-sm rounded-base
                                 bg-purple-50 border border-purple-300 text-gray-900
                                 focus:ring-purple-400 focus:border-purple-400
                                 dark:bg-slate-800 dark:border-slate-600 dark:text-white dark:placeholder-gray-400"
-                                placeholder="Description"></textarea>
-                        </div>
+                                    placeholder="Description"></textarea>
+                            </div>
 
-                        <!-- FILE -->
-                        <div>
-                            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                Contact Image
-                            </label>
-                            <input type="file"
-                            data-th-field="*{profileImage}"
-                                class="block w-full text-sm rounded-base cursor-pointer
+                            <!-- FILE -->
+                            <div>
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                    Contact Image
+                                </label>
+                                <input id="image_file_input" type="file" data-th-field="*{profileImage}" class="block w-full text-sm rounded-base cursor-pointer
                                 bg-purple-50 border border-purple-300 text-gray-900
                                 dark:bg-slate-800 dark:border-slate-600 dark:text-gray-300">
-                        </div>
 
-                        <!-- FAVORITE -->
-                        <div class="flex items-center gap-2">
-                            <input data-th-field="*{favorite}" type="checkbox"
-                                   class="w-4 h-4 text-purple-500 border-purple-300 rounded focus:ring-purple-400">
-                            <label class="text-sm text-gray-700 dark:text-gray-300">
-                                Mark as favorite
-                            </label>
-                        </div>
+                                <p class="text-red-500 text-sm" data-th-if="${#fields.hasErrors('profileImage')}"
+                                    data-th-errors="*{profileImage}">
+                                    Invalid Image File
+                                </p>
 
-                        <!-- BUTTONS -->
-                        <div class="flex gap-3 pt-3">
-                            <button type="submit"
-                                class="w-1/2 px-5 py-2.5 text-sm font-medium text-white rounded-base
+                                <img class="max-h-52 mx-auto rounded-lg shadow m-3" src="" id="upload_image_preview"
+                                    alt="">
+                            </div>
+
+                            <!-- FAVORITE -->
+                            <div class="flex items-center gap-2">
+                                <input data-th-field="*{favorite}" type="checkbox"
+                                    class="w-4 h-4 text-purple-500 border-purple-300 rounded focus:ring-purple-400">
+                                <label class="text-sm text-gray-700 dark:text-gray-300">
+                                    Mark as favorite
+                                </label>
+                            </div>
+
+                            <!-- BUTTONS -->
+                            <div class="flex gap-3 pt-3">
+                                <button type="submit" class="w-1/2 px-5 py-2.5 text-sm font-medium text-white rounded-base
                                 bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500
                                 hover:brightness-110 transition">
-                                Add Contact
-                            </button>
+                                    Add Contact
+                                </button>
 
-                            <button type="reset"
-                                class="w-1/2 px-5 py-2.5 text-sm font-medium rounded-base
-                                text-gray-900 dark:text-white
+                                <button type="reset" class="w-1/2 px-5 py-2.5 text-sm font-medium rounded-base
+                                text-gray-900 dark:text-black
                                 bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200
                                 dark:from-slate-700 dark:via-slate-600 dark:to-slate-700
                                 hover:brightness-110 transition">
-                                Reset
-                            </button>
-                        </div>
+                                    Reset
+                                </button>
+                            </div>
 
-                    </form>
+                        </form>
+                    </div>
+                    <!-- CARD END -->
+
                 </div>
-                <!-- CARD END -->
-
             </div>
         </div>
     </div>
-</div>
-
-<script>
-    console.log("Add Contact page loaded");
-</script>
+    <script data-th-src="@{/js/admin.js}"></script>
+    <script>
+        console.log("Add Contact page loaded");
+    </script>
 </body>
+
 </html>

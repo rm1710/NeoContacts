@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.contacts.Helper.Message;
+import com.contacts.Helper.MessageType;
 import com.contacts.entities.User;
-import com.contacts.exceptions.Message;
-import com.contacts.exceptions.MessageType;
 import com.contacts.forms.UserForm;
 import com.contacts.services.UserService;
 

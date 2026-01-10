@@ -36,6 +36,8 @@ public class Contact {
     private String LinkedInLink;
     // private List<String> socialLinks=new ArrayList<>();
 
+    private String cloudinaryImagepublicId;
+
     @ManyToOne
     @JsonIgnore
     private User user;

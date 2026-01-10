@@ -7,19 +7,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.contacts.Helper.Helper;
+import com.contacts.Helper.Message;
+import com.contacts.Helper.MessageType;
 import com.contacts.entities.Contact;
 import com.contacts.entities.User;
-import com.contacts.exceptions.Helper;
 import com.contacts.forms.ContactForm;
 import com.contacts.services.ContactService;
 
 import com.contacts.services.ImgService;
 import com.contacts.services.UserService;
-import com.contacts.exceptions.Message;
-import com.contacts.exceptions.MessageType;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+
+import java.util.UUID;
 
 import org.slf4j.Logger;
 
@@ -66,8 +68,10 @@ public class ContactController {
         String username = Helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
 
+        String filename = UUID.randomUUID().toString();
+
         // image process
-        String imageUrl = imageService.uploadImage(contactForm.getProfileImage());
+        String imageUrl = imageService.uploadImage(contactForm.getProfileImage(), filename);
 
         Contact contact = new Contact();
         contact.setName(contactForm.getName());
@@ -79,8 +83,10 @@ public class ContactController {
         contact.setUser(user);
         contact.setWebsiteLink(contactForm.getWebsiteLink());
         contact.setLinkedInLink(contactForm.getLinkedInLink());
+        contact.setPicture(imageUrl);
+        contact.setCloudinaryImagepublicId(filename);
 
-        // contactService.save(contact);
+        contactService.save(contact);
 
         session.setAttribute("message",
                 Message.builder()
