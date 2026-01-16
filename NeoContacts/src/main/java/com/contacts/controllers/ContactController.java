@@ -21,12 +21,15 @@ import com.contacts.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/user/contacts")
@@ -51,6 +54,7 @@ public class ContactController {
 
     @PostMapping("/add")
     public String saveContact(
+
             @Valid @ModelAttribute ContactForm contactForm,
             BindingResult result,
             Authentication authentication,
@@ -96,4 +100,20 @@ public class ContactController {
 
         return "redirect:/user/contacts/add";
     }
+
+    // view contacts
+
+    @RequestMapping
+    public String contactPage(Model model, Authentication authentication) {
+        String username= Helper.getEmailOfLoggedInUser(authentication);
+        
+        User user= userService.getUserByEmail(username);
+
+        List<Contact> contacts= contactService.getByUser(user);
+
+        model.addAttribute("contacts", contacts);
+
+        return "user/contacts";
+    }
+
 }
