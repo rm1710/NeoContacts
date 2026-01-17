@@ -2,6 +2,9 @@ package com.contacts.services;
 
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.Page;
+
 import com.contacts.entities.Contact;
 import com.contacts.entities.User;
 
@@ -20,5 +23,5 @@ public interface ContactService {
 
     List<Contact> getByUserId(String userId);
 
-    List<Contact> getByUser(User user);
+    Page<Contact> getByUser(User user, int page, int size, String sortBy, String direction);
 }

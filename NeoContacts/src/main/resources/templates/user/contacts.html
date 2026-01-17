@@ -15,47 +15,22 @@
             <div class="flex-col items-center">
                 <h1 class="text-5xl text-center">All Your Contacts</h1>
                 <div class="contacts_container p-5">
-
-
                     <div
                         class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
-                        <div
-                            class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 p-5">
+                        <form action="" data-th-action="@{'/user/contacts/search'}">
+                            <div
+                            class="flex space-x-3 items-center justify-start flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 p-5">
                             <div>
-                                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                                    class="inline-flex items-center justify-center text-body bg-neutral-secondary-medium box-border border border-default-medium hover:bg-neutral-tertiary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary shadow-xs font-medium leading-5 rounded-base text-sm px-3 py-2 focus:outline-none"
-                                    type="button">
-                                    Action
-                                    <svg class="w-4 h-4 ms-1.5 -me-0.5" aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                        viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m19 9-7 7-7-7" />
-                                    </svg>
-                                </button>
-                                <!-- Dropdown menu -->
-                                <div id="dropdown"
-                                    class="z-10 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-32">
-                                    <ul class="p-2 text-sm text-body font-medium"
-                                        aria-labelledby="dropdownDefaultButton">
-                                        <li>
-                                            <a href="#"
-                                                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Reward</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Promote</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded">Archive</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"
-                                                class="inline-flex items-center w-full p-2 text-fg-danger hover:bg-neutral-tertiary-medium rounded">Delete</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <select 
+                                    name="field"
+                                id="underline_select"
+                                    class="block py-2.5 ps-0 w-full text-sm text-body bg-transparent border-0 border-b-2 border-default-medium appearance-none focus:outline-none focus:ring-0 focus:border-brand peer">
+                                    <option selected>Select Feild</option>
+                                    <option value="name">Name</option>
+                                    <option value="phone">Phone</option>
+                                    <option value="email">Email</option>
+                                    
+                                </select>
                             </div>
                             <label for="input-group-1" class="sr-only">Search</label>
                             <div class="relative">
@@ -66,11 +41,14 @@
                                             d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                                     </svg>
                                 </div>
-                                <input type="text" id="input-group-1"
+                                <input 
+                                type="text" id="input-group-1" name="keyword"
                                     class="block w-full max-w-96 ps-9 pe-3 py-2 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
                                     placeholder="Search">
                             </div>
+                            <button type="submit" class="px-3 py-2 bg-gray-800 text-white rounded">Search</button>
                         </div>
+                    </form>
                         <table class="w-full text-sm text-left rtl:text-right text-body">
                             <thead
                                 class="text-sm text-body bg-neutral-secondary-medium border-b border-t border-default-medium">
@@ -91,33 +69,107 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr
-                                    data-th-object="${c}"
-                                    data-th-each="c:${contacts}"
+                                <tr data-th-each="c : ${pageContact.getContent()}" data-th-object="${c}"
                                     class="bg-neutral-primary-soft border-b border-default hover:bg-neutral-secondary-medium">
 
                                     <th scope="row" class="flex items-center px-6 py-4 text-heading whitespace-nowrap">
-                                        <img class="w-10 h-10 rounded-full"
+                                        <img class="w-10 h-10 rounded-full" data-th-src="@{*{picture}}"
                                             src="/docs/images/people/profile-picture-1.jpg" alt="Jese image">
                                         <div class="ps-3">
-                                            <div class="text-base font-semibold">Neil Sims</div>
-                                            <div class="font-normal text-body" >neil.sims@flowbite.com</div>
+
+                                            <!-- Name + Favorite -->
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-base font-semibold" data-th-text="*{name}">
+                                                    Neil Sims
+                                                </span>
+
+                                                <i data-th-if="*{favorite}"
+                                                    class="fa-solid fa-heart text-green-500 text-sm" title="Favorite">
+                                                </i>
+                                            </div>
+
+                                            <div class="font-normal text-body text-sm" data-th-text="*{email}">
+                                                neil.sims@flowbite.com
+                                            </div>
+
                                         </div>
+
                                     </th>
                                     <td class="px-6 py-4">
-                                        React Developer
+                                        <i class="fa-solid fa-phone w-4 h-4 "></i>
+                                        <span data-th-text="*{phoneNumber}"></span>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="flex items-center">
-                                            <div class="h-2.5 w-2.5 rounded-full bg-success me-2"></div> Online
+                                        <div class="flex items-center gap-3">
+
+                                            <!-- Website link -->
+                                            <a data-th-href="@{*{websiteLink}}"
+                                                class="text-blue-500 hover:text-blue-700 transition text-lg">
+                                                <i class="fa-solid fa-link"></i>
+                                            </a>
+
+                                            <!-- LinkedIn link -->
+                                            <a data-th-href="@{*{linkedInLink}}" target="_blank"
+                                                class="text-sky-600 hover:text-sky-800 transition text-lg">
+                                                <i class="fa-brands fa-linkedin"></i>
+                                            </a>
+
                                         </div>
                                     </td>
+
                                     <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-fg-brand hover:underline">Edit user</a>
+                                        <div class="flex items-center gap-4">
+
+                                            <!-- Delete -->
+                                            <button type="button" title="Delete"
+                                                class="text-red-500 hover:text-red-700 transition">
+                                                <i class="fa-solid fa-trash text-lg"></i>
+                                            </button>
+
+                                            <!-- Edit -->
+                                            <a title="Edit" class="text-blue-500 hover:text-blue-700 transition">
+                                                <i class="fa-solid fa-pen-to-square text-lg"></i>
+                                            </a>
+
+                                            <!-- View -->
+                                            <button type="button" title="View"
+                                                class="text-gray-600 hover:text-gray-800 transition">
+                                                <i class="fa-solid fa-eye text-lg"></i>
+                                            </button>
+
+                                        </div>
                                     </td>
+
                                 </tr>
                             </tbody>
                         </table>
+                        <div data-th-if="${pageContact.totalElements>0}"
+                            class="pagination_container bg-white dark:bg-gray-800 p-5 text-center">
+                            <nav aria-label="Page navigation example">
+                                <ul class="inline-flex -space-x-px text-base h-10">
+                                    <li data-th-unless="${pageContact.first}">
+                                        <a data-th-href="@{'/user/contacts?size='+${pageSize}+'&page=' + ${pageContact.number-1}}"
+                                            href="#"
+                                            class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                                    </li>
+                                    <li data-th-each="index :  ${#numbers.sequence(0,pageContact.totalPages-1)}">
+                                        <a data-th-href="@{'/user/contacts?size='+${pageSize}+'&page='+${index}}"
+                                            href="#"
+                                            data-th-classappend="${index==pageContact.number? 'bg-blue-200  dark:bg-gray-600' : 'bg-white dark:bg-gray-800'}"
+                                            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                                            <span data-th-text="${index+1}"></span>
+                                        </a>
+                                    </li>
+
+                                    <li data-th-unless="${pageContact.last}">
+                                        <a data-th-href="@{'/user/contacts?size='+${pageSize}+'&page=' + ${pageContact.number+1}}"
+                                            href="#"
+                                            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
                     </div>
                 </div>
             </div>

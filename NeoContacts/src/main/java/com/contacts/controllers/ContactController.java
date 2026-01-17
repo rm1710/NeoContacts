@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.contacts.Helper.AppConstants;
 import com.contacts.Helper.Helper;
 import com.contacts.Helper.Message;
 import com.contacts.Helper.MessageType;
@@ -30,6 +31,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Page;
 
 @Controller
 @RequestMapping("/user/contacts")
@@ -104,16 +106,35 @@ public class ContactController {
     // view contacts
 
     @RequestMapping
-    public String contactPage(Model model, Authentication authentication) {
-        String username= Helper.getEmailOfLoggedInUser(authentication);
-        
-        User user= userService.getUserByEmail(username);
 
-        List<Contact> contacts= contactService.getByUser(user);
+    public String contactPage(
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = AppConstants.PAGE_SIZE + "") int size,
+            @RequestParam(value = "sortBy", defaultValue = "name") String sortBy,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction,
+            Model model,
+            Authentication authentication) {
+        String username = Helper.getEmailOfLoggedInUser(authentication);
 
-        model.addAttribute("contacts", contacts);
+        User user = userService.getUserByEmail(username);
+
+        Page<Contact> contacts = contactService.getByUser(user, page, size, sortBy, direction);
+
+
+        model.addAttribute("pageContact", contacts);
+        model.addAttribute("pageSize",AppConstants.PAGE_SIZE);
 
         return "user/contacts";
+    }
+
+    // search handler
+    @RequestMapping("/search")
+    public String searchHandler(
+        @RequestParam("field") String field,
+        @RequestParam("keyword") String keyword
+    ){
+        logger.info("field{} keyword{}",field,keyword);
+        return "user/search";
     }
 
 }

@@ -10,6 +10,11 @@ import com.contacts.entities.User;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -59,7 +64,24 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contact> getByUser(User user) {
-        return contactRepo.findByUser(user);
+    public Page<Contact> getByUser(
+        User user,
+        int page,
+        int size,
+        String sortField,
+        String direction) {
+
+    if (sortField == null || sortField.isBlank()) {
+        sortField = "name"; // default column
     }
+
+    Sort sort = "desc".equalsIgnoreCase(direction)
+            ? Sort.by(sortField).descending()
+            : Sort.by(sortField).ascending();
+
+    var pageable = PageRequest.of(page, size, sort);
+
+    return contactRepo.findByUser(user, pageable);
+}
+
 }
