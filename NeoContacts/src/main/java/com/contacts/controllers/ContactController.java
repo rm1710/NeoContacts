@@ -14,6 +14,7 @@ import com.contacts.Helper.MessageType;
 import com.contacts.entities.Contact;
 import com.contacts.entities.User;
 import com.contacts.forms.ContactForm;
+import com.contacts.forms.ContactSearchForm;
 import com.contacts.services.ContactService;
 
 import com.contacts.services.ImgService;
@@ -124,16 +125,47 @@ public class ContactController {
         model.addAttribute("pageContact", contacts);
         model.addAttribute("pageSize",AppConstants.PAGE_SIZE);
 
+        model.addAttribute("contactSearchForm", new ContactSearchForm());
+
         return "user/contacts";
     }
 
     // search handler
     @RequestMapping("/search")
     public String searchHandler(
-        @RequestParam("field") String field,
-        @RequestParam("keyword") String keyword
+        @ModelAttribute ContactSearchForm contactSearchForm,
+
+        @RequestParam(value="size", defaultValue= AppConstants.PAGE_SIZE+"") int size,
+        @RequestParam(value="page", defaultValue="0") int page,
+        @RequestParam(value="sortBy", defaultValue="name") String sortBy,
+        @RequestParam(value="direction", defaultValue="asc") String direction,
+        Model model, Authentication authentication
     ){
-        logger.info("field{} keyword{}",field,keyword);
+        logger.info("field{} keyword{}",contactSearchForm.getField(),contactSearchForm.getKeyword());
+
+        var user=userService.getUserByEmail(Helper.getEmailOfLoggedInUser(authentication));
+
+
+        Page<Contact> pageContact= null;
+        if(contactSearchForm.getField().equalsIgnoreCase("name")){
+           pageContact=contactService.searchByName(contactSearchForm.getKeyword(), size, page, sortBy, direction, user);
+        }
+        else if(contactSearchForm.getField().equalsIgnoreCase("email")){
+            pageContact= contactService.searchByEmail(contactSearchForm.getKeyword(),size,page, sortBy, direction, user);
+        }else if(contactSearchForm.getField().equalsIgnoreCase("phoneNumber")){
+            pageContact= contactService.searchByPhoneNumber(contactSearchForm.getKeyword(),size,page, sortBy, direction, user);
+        }
+
+
+        logger.info("pageContact{}",pageContact);
+
+        model.addAttribute("contactSearchForm", contactSearchForm);
+
+        model.addAttribute("pageContact", pageContact);
+
+        model.addAttribute("pageSize",AppConstants.PAGE_SIZE);
+
+
         return "user/search";
     }
 

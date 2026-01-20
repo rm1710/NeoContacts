@@ -18,7 +18,7 @@
         <!-- Main Content -->
         <div class="sm:pl-64 pt-10 pb-10 min-h-screen
         bg-gradient-to-br from-pink-50 via-purple-50 to-indigo-50
-        dark:bg-gradient-to-br dark:from-slate-950 dark:via-slate-900 dark:to-slate-800">
+        dark:bg-gradient-to-br dark:from-white-950 dark:via-slate-900 dark:to-slate-800">
 
             <div class="grid grid-cols-12">
                 <div class="col-span-12 md:col-span-6 md:col-start-4">
@@ -130,6 +130,46 @@
                                 dark:bg-slate-800 dark:border-slate-600 dark:text-white dark:placeholder-gray-400"
                                     placeholder="Description"></textarea>
                             </div>
+                            <!-- WEBSITE & LINKEDIN -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                                <!-- WEBSITE LINK -->
+                                <div>
+                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                        Website
+                                    </label>
+                                    <div class="relative">
+                                        <span
+                                            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                            <i class="fa-solid fa-globe text-purple-400"></i>
+                                        </span>
+                                        <input type="url" data-th-field="*{WebsiteLink}"
+                                            placeholder="https://yourwebsite.com" class="block w-full pl-10 pr-3 py-2.5 text-sm rounded-base
+                       bg-purple-50 border border-purple-300 text-gray-900
+                       focus:ring-2 focus:ring-purple-400 focus:border-purple-400
+                       dark:bg-slate-800 dark:border-slate-600 dark:text-white dark:placeholder-gray-400">
+                                    </div>
+                                </div>
+                                <!-- LINKEDIN LINK -->
+                                <div>
+                                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                        LinkedIn
+                                    </label>
+                                    <div class="relative">
+                                        <span
+                                            class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                            <i class="fa-brands fa-linkedin text-purple-400"></i>
+                                        </span>
+                                        <input type="url" data-th-field="*{LinkedInLink}"
+                                            placeholder="https://linkedin.com/in/username" class="block w-full pl-10 pr-3 py-2.5 text-sm rounded-base
+                       bg-purple-50 border border-purple-300 text-gray-900
+                       focus:ring-2 focus:ring-purple-400 focus:border-purple-400
+                       dark:bg-slate-800 dark:border-slate-600 dark:text-white dark:placeholder-gray-400">
+                                    </div>
+                                </div>
+
+                            </div>
+
 
                             <!-- FILE -->
                             <div>
@@ -167,7 +207,7 @@
                                 </button>
 
                                 <button type="reset" class="w-1/2 px-5 py-2.5 text-sm font-medium rounded-base
-                                text-gray-900 dark:text-black
+                                text-gray-900 dark:text-white
                                 bg-gradient-to-r from-pink-200 via-purple-200 to-indigo-200
                                 dark:from-slate-700 dark:via-slate-600 dark:to-slate-700
                                 hover:brightness-110 transition">

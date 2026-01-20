@@ -1,0 +1,162 @@
+<div data-th-fragment="contact">
+
+    <!-- Modal toggle button -->
+    <!-- <button
+        class="text-white bg-gradient-to-r from-blue-600 to-indigo-600
+               hover:from-blue-700 hover:to-indigo-700
+               focus:ring-4 focus:ring-blue-300
+               font-medium rounded-lg text-sm px-5 py-2.5
+               transition-all duration-200 shadow-md"
+        type="button">
+        View Contact
+    </button> -->
+
+    <!-- Main modal -->
+    <div id="view_contact_modal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 flex justify-center items-center
+                bg-black/40 backdrop-blur-sm">
+
+        <div class="relative p-4 w-full max-w-2xl max-h-full">
+
+            <!-- Modal content -->
+            <div class="relative rounded-2xl overflow-hidden
+                       bg-white dark:bg-slate-900
+                       shadow-2xl transition-colors">
+
+                <!-- Header -->
+                <div class="flex items-center justify-between px-6 py-5
+                           border-b border-gray-200 dark:border-slate-700
+                           bg-gradient-to-r from-gray-50 to-white
+                           dark:from-slate-800 dark:to-slate-900">
+
+                    <h3 class="text-xl font-semibold text-gray-800 dark:text-gray-100">
+                        Contact Details
+                    </h3>
+
+                    <button type="button" class="text-gray-500 hover:text-gray-700
+                               dark:text-gray-400 dark:hover:text-gray-200
+                               hover:bg-gray-100 dark:hover:bg-slate-800
+                               rounded-full p-2 transition-colors" data-modal-hide="view_contact_modal">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        <span class="sr-only">Close</span>
+                    </button>
+
+                    <!-- <button
+                        class="text-gray-500 hover:text-gray-700
+                               dark:text-gray-400 dark:hover:text-gray-200
+                               hover:bg-gray-100 dark:hover:bg-slate-800
+                               rounded-full p-2 transition-colors">
+                        ✕
+                    </button> -->
+                </div>
+
+                <!-- Body -->
+                <div class="p-6 md:p-8">
+                    <div class="flex flex-col md:flex-row gap-8">
+
+                        <!-- LEFT: Profile section -->
+                        <div class="md:w-2/5 flex flex-col items-center text-center">
+
+                            <img id="contact_avatar" class="w-32 h-32 rounded-full
+                                       bg-gradient-to-br from-gray-200 to-gray-300
+                                       dark:from-slate-700 dark:to-slate-600
+                                       shadow-lg mb-5 border-4
+                                       border-white dark:border-slate-800" src="" alt="Contact Avatar">
+
+                            <h4 id="contact_name" class="text-2xl font-bold
+                                       text-gray-800 dark:text-gray-100 mb-1">
+                            </h4>
+                            <span id="contact_favorite" class="hidden"><i class="fa-solid fa-heart text-green-500"></i></span>
+
+                            <p id="contact_email" class="text-sm text-gray-600 dark:text-gray-400">
+                            </p>
+                        </div>
+
+                        <!-- RIGHT: Details section -->
+                        <div class="md:w-full rounded-xl p-6
+                                   bg-gradient-to-br from-gray-50 via-white to-gray-100
+                                   dark:from-slate-800 dark:via-slate-900 dark:to-slate-800
+                                   shadow-inner">
+
+                            <h5 class="text-lg font-semibold mb-5 pb-2 border-b
+                                       text-gray-800 border-gray-200
+                                       dark:text-gray-100 dark:border-slate-700">
+                                Information
+                            </h5>
+
+                            <div class="space-y-5 text-sm">
+
+                                <div class="flex justify-between items-start">
+                                    <span class="font-medium text-gray-600 dark:text-gray-300">
+                                        Mobile Number
+                                    </span>
+                                    <span id="contact_phone" class="text-gray-900 dark:text-gray-100 text-right">
+                                    </span>
+                                </div>
+
+                                <div class="flex justify-between items-start">
+                                    <span class="font-medium text-gray-600 dark:text-gray-300">
+                                        Address
+                                    </span>
+                                    <span id="contact_address" class="text-gray-900 dark:text-gray-100 text-right">
+                                    </span>
+                                </div>
+
+                                <div class="flex justify-between items-start">
+                                    <span class="font-medium text-gray-600 dark:text-gray-300">
+                                        Website
+                                    </span>
+                                    <span id="contact_website" class="text-blue-600 dark:text-blue-400
+                                                 hover:underline text-right break-all">
+                                    </span>
+                                </div>
+
+                                <div class="flex justify-between items-start">
+                                    <span class="font-medium text-gray-600 dark:text-gray-300">
+                                        LinkedIn
+                                    </span>
+                                    <span id="contact_linkedin" class="text-blue-600 dark:text-blue-400
+                                                 hover:underline text-right break-all">
+                                    </span>
+                                </div>
+
+                                <div class="pt-4 border-t border-gray-200 dark:border-slate-700">
+                                    <span class="block font-medium text-gray-600 dark:text-gray-300 mb-1">
+                                        Notes
+                                    </span>
+                                    <span id="contact_notes" class="block text-gray-700 dark:text-gray-200
+                                                 text-right whitespace-pre-line">
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <!-- <div
+                    class="flex justify-end px-6 py-5
+                           border-t border-gray-200 dark:border-slate-700
+                           bg-gradient-to-r from-gray-50 to-white
+                           dark:from-slate-800 dark:to-slate-900">
+
+                    <button
+                        class="px-5 py-2.5 text-sm font-medium
+                               text-gray-700 dark:text-gray-200
+                               bg-white dark:bg-slate-700
+                               border border-gray-300 dark:border-slate-600
+                               rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600
+                               transition">
+                        Close
+                    </button>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+
+</div>
