@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.contacts.Helper.Message;
 import com.contacts.Helper.MessageType;
@@ -87,6 +88,13 @@ public class PageController {
         // .phoneNumber(userForm.getPhoneNumber())
         // .profilePic(null)
         // .build();
+        if (userService.isUserExistsByEmail(userForm.getEmail())) {
+            Message message = Message.builder().content("User with this email already exists!! Try with another email")
+                    .type(MessageType.red).build();
+
+            session.setAttribute("message", message);
+            return "redirect:/register";
+        }
 
         User user = new User();
         user.setName(userForm.getName());
@@ -106,4 +114,45 @@ public class PageController {
         // message= "Registration successful";
         return "redirect:/register";
     }
+
+    // @RequestMapping(value = "/do-login", method = RequestMethod.POST)
+    // public String processLogin(
+    //         @RequestParam("email") String email,
+    //         @RequestParam("password") String password,
+    //         HttpSession session) {
+
+    //     // 1. Check user exists or not
+    //     User user = userService.getUserByEmail(email);
+
+    //     if (user == null) {
+    //         Message message = Message.builder()
+    //                 .content("User does not exist!")
+    //                 .type(MessageType.red)
+    //                 .build();
+    //         session.setAttribute("message", message);
+    //         return "redirect:/login";
+    //     }
+
+    //     // 2. Check password
+    //     if (!user.getPassword().equals(password)) {
+    //         Message message = Message.builder()
+    //                 .content("Incorrect password!")
+    //                 .type(MessageType.red)
+    //                 .build();
+    //         session.setAttribute("message", message);
+    //         return "redirect:/login";
+    //     }
+
+    //     // 3. Login success
+    //     session.setAttribute("loggedInUser", user);
+
+    //     Message message = Message.builder()
+    //             .content("Login successful!")
+    //             .type(MessageType.green)
+    //             .build();
+    //     session.setAttribute("message", message);
+
+    //     return "redirect:/home";
+    // }
+
 }

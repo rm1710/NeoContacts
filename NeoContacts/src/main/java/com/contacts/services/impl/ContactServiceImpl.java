@@ -18,6 +18,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 
+import com.contacts.Helper.Helper;
+import com.contacts.Helper.*;
+import com.contacts.Helper.Message;
+import com.contacts.Helper.MessageType;
+import com.contacts.services.UserService;
+
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,8 +42,21 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact update(Contact contact) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+
+        var contactOld = contactRepo.findById(contact.getId())
+                .orElseThrow(() -> new ResourcesNotFoundException("Contact not found"));
+        contactOld.setName(contact.getName());
+        contactOld.setEmail(contact.getEmail());
+        contactOld.setPhoneNumber(contact.getPhoneNumber());
+        contactOld.setAddress(contact.getAddress());
+        contactOld.setDescription(contact.getDescription());
+        contactOld.setPicture(contact.getPicture());
+        contactOld.setFavorite(contact.isFavorite());
+        contactOld.setWebsiteLink(contact.getWebsiteLink());
+        contactOld.setLinkedInLink(contact.getLinkedInLink());
+        contactOld.setCloudinaryImagepublicId(contact.getCloudinaryImagepublicId());
+
+        return contactRepo.save(contactOld);
     }
 
     @Override
@@ -46,12 +66,14 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact getById(String id) {
-        return contactRepo.findById(id).orElseThrow(() -> new RuntimeException("Contact not found"));
+        return contactRepo.findById(id).orElseThrow(() -> new ResourcesNotFoundException("Contact not found"));
     }
 
     @Override
+    @Transactional
     public void delete(String id) {
-        var contact = contactRepo.findById(id).orElseThrow(() -> new RuntimeException("Contact not found"));
+        var contact = contactRepo.findById(id).orElseThrow(() -> new ResourcesNotFoundException("Contact not found"));
+        
         contactRepo.delete(contact);
     }
 

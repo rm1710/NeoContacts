@@ -1,27 +1,167 @@
 <!DOCTYPE html>
-<html lang="en" th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{::script})}">
+<html lang="en"
+      th:replace="~{base :: parent(~{::#content}, ~{::title}, ~{::script})}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-th-text="${loggedInUser.name} + ' | Dashboard'">Profile</title>
+    <title data-th-text="${loggedInUser.name} + ' | Profile'">Profile</title>
 </head>
 
 <body>
-    <div id="content">
-        <div class="sm:pl-64" style="height: 1000px;">
-            <div class="flex justify-center flex-col items-center">
-                <h1>Welcome to profile page</h1>
+<div id="content">
+
+    <!-- Sidebar -->
+    <div th:if="${loggedInUser}">
+        <div data-th-replace="~{user/sidebar :: sidebar}"></div>
+    </div>
+
+    <!-- Main Section -->
+    <div
+        class="sm:pl-64 pt-20 min-h-screen
+               bg-gradient-to-br from-gray-100 via-white to-indigo-100
+               dark:from-slate-900 dark:via-slate-800 dark:to-slate-900
+               transition-colors duration-500">
+
+        <div class="flex justify-center px-4 md:pt-24">
+
+            <!-- Profile Card -->
+            <div
+                class="relative w-full max-w-3xl rounded-2xl overflow-hidden
+                       bg-gradient-to-br from-indigo-50 via-white to-pink-50
+                       dark:from-slate-800 dark:via-slate-900 dark:to-slate-800
+                       border border-gray-200 dark:border-white/10
+                       shadow-xl hover:shadow-2xl
+                       transition-all duration-500 hover:-translate-y-1">
+
+                <!-- Header Gradient -->
+                <div
+                    class="h-28 bg-gradient-to-r
+                           from-indigo-400 via-purple-400 to-pink-400
+                           dark:from-indigo-600 dark:via-purple-600 dark:to-pink-600">
+                </div>
+
+                <!-- Avatar -->
+                <div class="-mt-20 flex justify-center">
+                    <div
+                        class="p-1 rounded-full
+                               bg-gradient-to-tr from-indigo-500 to-pink-500
+                               shadow-lg transition-transform duration-300
+                               hover:scale-105">
+                        <img
+                            data-th-src="@{${loggedInUser.profilePic}}"
+                            src="path/to/profilePic.jpg"
+                            alt="Profile Photo"
+                            class="w-40 h-40 rounded-full object-cover
+                                   bg-white dark:bg-slate-800">
+                    </div>
+                </div>
+
+                <!-- User Info -->
+                <div class="text-center px-8 mt-4">
+                    <h2
+                        class="text-3xl font-bold text-gray-800 dark:text-white"
+                        data-th-text="${loggedInUser.name}">
+                        User Name
+                    </h2>
+
+                    <p
+                        class="text-gray-600 dark:text-gray-400 mt-1"
+                        data-th-text="${loggedInUser.email}">
+                        user@email.com
+                    </p>
+
+                    <p
+                        class="text-gray-500 dark:text-gray-400 mt-3 text-sm
+                               max-w-xl mx-auto leading-relaxed"
+                        data-th-text="${loggedInUser.about}">
+                        About the user...
+                    </p>
+                </div>
+
+                <!-- Info Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 px-8 py-6">
+
+                    <div
+                        class="rounded-xl p-4 text-center
+                               bg-white dark:bg-slate-800
+                               border border-gray-200 dark:border-white/10
+                               transition-all duration-300
+                               hover:shadow-lg hover:-translate-y-1">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            Email Verified
+                        </p>
+                        <p
+                            class="text-xl font-semibold text-gray-800 dark:text-white mt-1"
+                            data-th-text="${loggedInUser.emailVerified ? 'YES' : 'NO'}">
+                            YES
+                        </p>
+                    </div>
+
+                    <div
+                        class="rounded-xl p-4 text-center
+                               bg-white dark:bg-slate-800
+                               border border-gray-200 dark:border-white/10
+                               transition-all duration-300
+                               hover:shadow-lg hover:-translate-y-1">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            Phone
+                        </p>
+                        <p
+                            class="text-xl font-semibold text-gray-800 dark:text-white mt-1"
+                            data-th-text="${loggedInUser.phoneNumber ?: 'Not Added'}">
+                            Not Added
+                        </p>
+                    </div>
+
+                    <div
+                        class="rounded-xl p-4 text-center
+                               bg-white dark:bg-slate-800
+                               border border-gray-200 dark:border-white/10
+                               transition-all duration-300
+                               hover:shadow-lg hover:-translate-y-1">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            Account Type
+                        </p>
+                        <p class="text-xl font-semibold text-indigo-600 dark:text-indigo-400 mt-1">
+                            Google OAuth
+                        </p>
+                    </div>
+
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex justify-center gap-4 pb-8">
+                    <button
+                        class="px-6 py-2 rounded-full
+                               bg-indigo-600 hover:bg-indigo-700
+                               text-white font-medium
+                               shadow-md
+                               transition-all duration-300
+                               hover:scale-105 hover:shadow-lg">
+                        Edit Profile
+                    </button>
+
+                    <button
+                        class="px-6 py-2 rounded-full
+                               bg-gray-200 hover:bg-gray-300
+                               dark:bg-gray-700 dark:hover:bg-gray-600
+                               text-gray-800 dark:text-white
+                               shadow-md
+                               transition-all duration-300
+                               hover:scale-105 hover:shadow-lg">
+                        Change Password
+                    </button>
+                </div>
+
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        console.log("This is profile page");
-    </script>
-    <script>
-        console.log("second profile page script");
-    </script>
+<script>
+    console.log("Profile page loaded (Tailwind only)");
+</script>
+
 </body>
-
 </html>

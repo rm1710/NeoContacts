@@ -26,7 +26,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //user dashboard
     @RequestMapping(value = "/dashboard")
     public String userDashboard(){
         System.out.println("user dashboard");

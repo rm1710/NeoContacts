@@ -39,7 +39,13 @@ async function loadContactdata(id) {
     console.log("Load contact data for id:", id);
 
     try {
-        const response = await fetch(`http://localhost:8081/contacts/${id}`);
+    
+        let fetchUrl = `/contacts/${id}`;
+
+
+        console.log("Fetching URL:", fetchUrl);
+
+        const response = await fetch(fetchUrl);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -98,4 +104,22 @@ async function loadContactdata(id) {
 
 function closeContactModal() {
     document.getElementById("view_contact_modal").classList.add("hidden");
+}
+
+function deleteContact(id) {
+  Swal.fire({
+    title: "Do you want to delete the contact?",
+    text: "This action cannot be undone!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Delete",
+    cancelButtonText: "Cancel",
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const url = `/user/contacts/delete/${id}`;
+      window.location.href = url;
+    }
+  });
 }
